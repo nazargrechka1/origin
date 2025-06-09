@@ -8,11 +8,14 @@ print('Guess the number game, click 7 for more information or click enter for pl
 
 while True:
 
-    key = keyboard.read_key()
+    event = keyboard.read_event(suppress=True)
+
+    if event.event_type == keyboard.KEY_DOWN:
+         key = event.name
 
     if key == '7':
 
-        print('The programme generates random integer from 0 to 100.')
+        print('The program generates random integer from 0 to 100.')
         print('You have to guess it and you have only 5 attempts for it')
         break
 
@@ -20,16 +23,16 @@ while True:
         print('Let`s play')
         break
     
-time.sleep(1)
+time.sleep(0.5)
 
 num =  random.randint(0 , 100)
 attempts = 0
 maxAttempts = 5
 
-
+ 
 while attempts < maxAttempts:
      
-    try: userInput = int(input('Write your number'))
+    try: userInput = int(input('Write your number:'))
 
     except ValueError:
         print('please enter valid number')
@@ -38,14 +41,14 @@ while attempts < maxAttempts:
     attempts += 1
 
     if userInput > num:
-            print ('less')
+            print ('Less')
             continue
     
     elif userInput < num:
-            print ('more')
+            print ('More')
             continue
 
-    else: print ('equal')
+    else: print ('You won')
     break
 
-else: print('You lose')
+else: print('You lose, the number was: ', num)
